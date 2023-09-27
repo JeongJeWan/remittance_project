@@ -37,4 +37,23 @@ public class User {
     // 사용자 최대 한도
     @Column(name = "max_limit", nullable = false)
     private Integer maxLimit;
+
+    /**
+     * 사용자 생성에 대한 생성자
+     *
+     * @param userStatus    사용자 상태
+     * @param username      사용자 이름
+     * @param balance       사용자 현재 잔액
+     * @param maxLimit      사용자 최대 한도
+     */
+    public User(UserStatus userStatus, String username, Integer balance, Integer maxLimit) {
+        this.status = userStatus;
+        this.username = username;
+        this.balance = balance;
+        this.maxLimit = maxLimit;
+    }
+
+    public void updateBalance(Integer balance) {
+        this.balance = balance;
+    }
 }
