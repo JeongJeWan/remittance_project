@@ -15,6 +15,9 @@ public class RemittanceRepositoryImpl extends QuerydslRepositorySupport implemen
         super(Remittance.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<SelectRemittanceResponseDto> findUserRemittanceList(Long userId) {
 
