@@ -31,7 +31,7 @@ public class RemittanceService {
      *
      * @param senderId      보내는 사용자 아이디
      * @param receiverId    받는 사용자 아이디
-     * @param amount        보내는 사용자 송금 금액
+     * @param requestDto    보내는 사용자 송금 금액 dto
      */
     public void createRemittance(Long senderId, Long receiverId, RemittanceAmountRequestDto requestDto) {
 
@@ -60,7 +60,7 @@ public class RemittanceService {
         // 사용자에 대한 송금 목록 조회
         List<SelectRemittanceResponseDto> remittanceList = remittanceRepository.findUserRemittanceList(userId);
 
-        // 송신자(sender)와 수신자(receiver)의 사용자 이름(username) 조회
+        // 송신자(sender)와 수신자(receiver)의 사용자 이름(username) 변환 후 반환
         List<RemittanceResponseDto> responseList = remittanceList.stream()
                 .map(remittance -> {
                     User sender = userRepository.findById(remittance.getSenderId()).orElse(null);

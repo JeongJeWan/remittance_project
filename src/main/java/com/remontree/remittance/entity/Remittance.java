@@ -19,12 +19,12 @@ public class Remittance {
     @Column(name = "remittance_id", nullable = false)
     private Long id;
 
-    // 송금시 보내는 사람
+    // 송금시 보내는 사용자
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
 
-    // 송금시 받는 사람
+    // 송금시 받는 사용자
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;

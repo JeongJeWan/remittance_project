@@ -22,7 +22,6 @@ public class UserService {
      * 사용자 생성에 대한 메서드.
      *
      * @param requestDto    생성 시 필요한 정보
-     * @return              생성 후 사용자 아이디 반환
      */
     public void createUser(CreateUserRequestDto requestDto) {
 
@@ -37,9 +36,8 @@ public class UserService {
     /**
      * 사용자 잔액 충전 메서드.
      *
-     * @param userId    사용자 아이디
-     * @param balance   사용자 잔액
-     * @return          잔액 충전 후 현재 잔액 반환
+     * @param userId        사용자 아이디
+     * @param requestDto    사용자 잔액 dto
      */
     public void chargeBalance(Long userId, ChargeBalanceRequestDto requestDto) {
 
