@@ -63,10 +63,8 @@ public class RemittanceService {
         // 송신자(sender)와 수신자(receiver)의 사용자 이름(username) 변환 후 반환
         List<RemittanceResponseDto> responseList = remittanceList.stream()
                 .map(remittance -> {
-                    User sender = userRepository.findById(remittance.getSenderId()).orElse(null);
-                    User receiver = userRepository.findById(remittance.getReceiverId()).orElse(null);
-                    String senderName = (sender != null) ? sender.getUsername() : null;
-                    String receiverName = (receiver != null) ? receiver.getUsername() : null;
+                    String senderName = userRepository.findUsernameById(remittance.getSenderId());
+                    String receiverName = userRepository.findUsernameById(remittance.getReceiverId());
 
                     return new RemittanceResponseDto(senderName, receiverName, remittance.getAmount(), remittance.getCreatedAt());
                 })
