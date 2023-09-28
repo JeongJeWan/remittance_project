@@ -22,6 +22,11 @@ public class UserStatus {
     @Column(name = "name", nullable = false, length = 10)
     private String name;
 
+    public UserStatus(String statusCode, String name) {
+        this.statusCode = statusCode;
+        this.name = name;
+    }
+
     /**
      * 사용자 상태코드들을 상수로 관리하기 위한 Enum.
      */
