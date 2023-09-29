@@ -1,0 +1,33 @@
+### 사용자1 생성
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+  "username" : "정제완",
+  "maxLimit" : 2000000
+}
+
+### 사용자2 생성
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+  "username" : "홍길동",
+  "maxLimit" : 1000000
+}
+
+### 사용자 금액 충전 성공
+PATCH http://localhost:8080/api/user/1
+Content-Type: application/json
+
+{
+  "balance" : 1500000
+}
+
+### 사용자 금액 충전 실패 - 한도 초과
+PATCH http://localhost:8080/api/user/1
+Content-Type: application/json
+
+{
+  "balance" : 15000000
+}
