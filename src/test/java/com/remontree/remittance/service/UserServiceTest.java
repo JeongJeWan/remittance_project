@@ -4,6 +4,7 @@ import com.remontree.remittance.dto.request.ChargeBalanceRequestDto;
 import com.remontree.remittance.dto.request.CreateUserRequestDto;
 import com.remontree.remittance.entity.User;
 import com.remontree.remittance.entity.UserStatus;
+import com.remontree.remittance.exception.LimitExceededException;
 import com.remontree.remittance.exception.UserNotFoundException;
 import com.remontree.remittance.repository.user.UserRepository;
 import com.remontree.remittance.repository.userstatus.UserStatusRepository;
@@ -94,5 +95,17 @@ class UserServiceTest {
         assertThrows(UserNotFoundException.class, () -> userService.chargeBalance(testUser.getId(), chargeBalanceRequestDto));
 
         verify(userRepository, times(1)).findById(testUser.getId());
+    }
+
+    @Test
+    @DisplayName("사용자 금액 충전 실패 - 사용자 한도 초과")
+    void createRemittance_LimitExceeded() {
+        ChargeBalanceRequestDto chargeBalanceRequestDto = ReflectionUtils.newInstance(ChargeBalanceRequestDto.class);
+        ReflectionTestUtils.setField(chargeBalanceRequestDto, "balance", 5000000);
+
+        when(userRepository.findById(testUser.getId())).thenReturn(Optional.of(testUser));
+
+        assertThrows(LimitExceededException.class, () ->
+                userService.chargeBalance(testUser.getId(), chargeBalanceRequestDto));
     }
 }
