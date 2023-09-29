@@ -12,12 +12,14 @@ import com.remontree.remittance.repository.remittance.RemittanceRepository;
 import com.remontree.remittance.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RemittanceService {
 
     private final UserRepository userRepository;
@@ -55,6 +57,7 @@ public class RemittanceService {
      * @param userId    사용자 아이디
      * @return          사용자에 대한 송금 목록 반환
      */
+    @Transactional(readOnly = true)
     public List<RemittanceResponseDto> selectUserRemittanceList(Long userId) {
 
         // 사용자에 대한 송금 목록 조회
